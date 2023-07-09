@@ -9,10 +9,10 @@ class Membro(DefaultModel):
     espaco_de_trabalho_id = db.Column(
         db.Integer, db.ForeignKey('espaco_de_trabalho.id'), nullable=False
     )
-    espaco_de_trabalho = db.relationship(
+    espaco_de_trabalhos = db.relationship(
         "EspacoDeTrabalho", back_populates="membro"
     )
-    membro_espaco = db.relationship(
+    membro_espacos = db.relationship(
         "MembroEspaco", back_populates="membro"
     )
 
