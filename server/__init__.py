@@ -10,7 +10,6 @@ class Servidor(Flask):
         super().__init__(__name__)
         self.config.from_prefixed_env()
 
-    
     def create_database(self):
         """Cria o banco de dados"""
         with self.app_context():
@@ -18,7 +17,10 @@ class Servidor(Flask):
 
     def commands(self):
         """Adiciona os comandos ao servidor"""
-        self.cli.add_command(click.command(lambda: self.create_database()), 'create_database')
+        self.cli.add_command(
+            cmd=click.command(lambda: self.create_database()),
+            name='create_database'
+        )
 
     def setup(self):
         """Inicializa o servidor"""
