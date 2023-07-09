@@ -35,6 +35,24 @@ class Grupo(DefaultModel):
         self.customizar = customizar
 
     @staticmethod
+    def create_grupo_admin():
+        """Cria o grupo admin"""
+        grupo = Grupo.query.filter(
+            Grupo.nome == 'admin',
+            Grupo.customizar == False  # noqa # pylint: disable=singleton-comparison
+        ).first()
+        if not grupo:
+            logger.debug(
+                '🤖 Novo Grupos de permissões no sistema endpoint:admin')
+            grupo = Grupo()
+            grupo.insert_grupo(
+                nome='admin',
+                customizar=False
+            )
+            grupo.add()
+        return grupo
+
+    @staticmethod
     def create_grupo_with_permissions(endpoint, permissions: list = None):
         """Cria o grupo"""
         permissions = permissions or []

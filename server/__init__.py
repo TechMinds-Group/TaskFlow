@@ -27,7 +27,9 @@ class Servidor(Flask):
 
     def create_permissions(self):
         """Cria as permissões de rotas do servidor"""
-        permissao = import_module('server.database.models').Permissao
+        models = import_module('server.database').models
+        permissao = models.Permissao
+        models.Grupo.create_grupo_admin()
         logger.info('🔧 Iniciando as configurações de permissoes.')
         permissao.reset_permissions()
         for rule in list(self.url_map.iter_rules()):
