@@ -7,6 +7,5 @@ form = criar_trabalho_parser
 form.add_argument(
     'nome',
     required=True,
-    description='Nome do espaço de trabalho',
     location='json',
 )
