@@ -1,8 +1,9 @@
 """Rotas relacionadas a espaço de trabalho"""
-# from flask_jwt_extended import get_jwt_identity, jwt_required
+from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_restx import Resource, abort
-from flask_jwt_extended import jwt_required
+from sqlalchemy.exc import IntegrityError
 from server.api import api
+from server.database.models import EspacoDeTrabalho
 from .serializers import trabalho_serializer
 from .forms import criar_trabalho_parser
 
@@ -14,35 +15,22 @@ np_espaco_de_trabalhos = api.namespace(
 class EspacoDeTrabalhoResource(Resource):
     """Classe de recursos de espaço de trabalho"""
 
-    def query_for_id(self, trabalho_id):
-        """Pega um espaço de trabalho pelo id ou levanta 404"""
-        print(trabalho_id)
-        # pylint: disable=W0105
-        """
-        trabalho = EspacoDeTrabalho.query.filter(
-            EspacoDeTrabalho.id == trabalho_id
-        ).first()
-        if not trabalho:
-        """
-        abort(404, message='Espaço de trabalho não encontrado')
-        # pylint: disable=W0105
-        """
-        return trabalho
-        """
-
     @np_espaco_de_trabalhos.marshal_with(trabalho_serializer)
     @jwt_required()
     def get(self, trabalho_id=None):
         """Retorna um espaço de trabalho pelo id
         ou todos os espaços de trabalho"""
         if trabalho_id:
-            trabalhos = self.query_for_id(trabalho_id)  # pylint: disable=E1111
+            trabalhos = EspacoDeTrabalho.query_with_user(
+                usuario_id=get_jwt_identity(),
+                trabalho_id=trabalho_id
+            )
+            if not trabalhos:
+                abort(404, message='Espaço de trabalho não encontrado')
         else:
-            trabalhos = []
-            # pylint: disable=W0105
-            """
-            trabalhos = EspacoDeTrabalho.query.all()
-            """
+            trabalhos = EspacoDeTrabalho.query_with_user(
+                usuario_id=get_jwt_identity()
+            )
         return trabalhos, 200
 
     @np_espaco_de_trabalhos.marshal_with(trabalho_serializer)
@@ -50,23 +38,27 @@ class EspacoDeTrabalhoResource(Resource):
     @jwt_required()
     def post(self):
         """Cria um novo espaço de trabalho"""
-        # pylint: disable=W0105
-        """
         payload = criar_trabalho_parser.parse_args()
         usuario_id = get_jwt_identity()
 
         trabalho = EspacoDeTrabalho()
-        trabalho.insert_infos(**payload)
-        trabalho.create_membro(usuario_id)
+        trabalho.insert_espaco_de_trabalho(**payload)
+
         try:
             trabalho.add()
-        except IntegrityError as error:
+        except IntegrityError:
             trabalho.rollback()
-            abort(500, message='Erro interno do servidor')
+            abort(500, message='Erro ao criar espaço de trabalho')
+        try:
+            trabalho.add_membro(usuario_id)
+        except IntegrityError:
+            trabalho.rollback()
+            abort(
+                500,
+                message='Erro ao adicionar membro ao espaço de trabalho'
+            )
         trabalho.save()
         return trabalho, 201
-        """
-        print('post')
 
 
 np_espaco_de_trabalhos.add_resource(
