@@ -38,9 +38,6 @@ membro_serializer = api.model(
             example=str(uuid4()),
             description='Id do Espaço de trabalho'
         ),
-        'espaco_de_trabalhos': fields.List(
-            fields.Nested(trabalho_serializer)
-        ),
         'membro_espacos': fields.List(
             fields.Nested(membro_espaco_serializer)
         )

@@ -4,16 +4,21 @@ from .default import DefaultModel, db
 
 class Membro(DefaultModel):
     """Modelo do membro"""
-    usuario_id = db.Column(db.String(36), db.ForeignKey(
-        'usuario.id'), nullable=False)
+    __tablename__ = 'Membro'
+    usuario_id = db.Column(
+        db.String(36),
+        db.ForeignKey('Usuario.id'),
+        nullable=False)
     espaco_de_trabalho_id = db.Column(
-        db.String(36), db.ForeignKey('espaco_de_trabalho.id'), nullable=False
+        db.String(36),
+        db.ForeignKey('EspacoDeTrabalho.id'),
+        nullable=False
     )
-    espaco_de_trabalhos = db.relationship(
-        "EspacoDeTrabalho", back_populates="membro"
-    )
+
+    # RELATIONSHIPS
     membro_espacos = db.relationship(
-        "MembroEspaco", back_populates="membro"
+        "MembroEspaco",
+        backref="Membro"
     )
 
     def insert_membro(self, usuario_id, espaco_de_trabalho_id, **_):

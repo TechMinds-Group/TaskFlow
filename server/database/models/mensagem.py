@@ -4,10 +4,15 @@ from .default import DefaultModel, db
 
 class Mensagem(DefaultModel):
     """Modelo de mensagem"""
-    membro_id = db.Column(db.String(36), db.ForeignKey(
-        "membro.id"), nullable=False)
-    tarefa_id = db.Column(db.String(36), db.ForeignKey(
-        "tarefa.id"), nullable=False)
+    __tablename__ = "Mensagem"
+    membro_id = db.Column(
+        db.String(36),
+        db.ForeignKey("Membro.id"),
+        nullable=False)
+    tarefa_id = db.Column(
+        db.String(36),
+        db.ForeignKey("Tarefa.id"),
+        nullable=False)
 
     def insert_mensagem(self, membro_id, tarefa_id, **_):
         """Insere a mensagem"""

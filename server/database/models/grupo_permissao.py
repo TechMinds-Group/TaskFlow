@@ -4,13 +4,11 @@ from .default import DefaultModel, db
 
 class GrupoPermissao(DefaultModel):
     """Modelo do grupo permissao"""
+    __tablename__ = "GrupoPermissao"
     permissao_id = db.Column(db.String(36), db.ForeignKey(
-        "permissao.id"), nullable=False)
+        "Permissao.id"), nullable=False)
     grupo_id = db.Column(db.String(36), db.ForeignKey(
-        "grupo.id"), nullable=False)
-    permissao = db.relationship(
-        "Permissao", back_populates="grupo_permissao"
-    )
+        "Grupo.id"), nullable=False)
 
     def insert_grupo_permissao(self, permissao_id, grupo_id, **_):
         """Insere o grupo permissao"""

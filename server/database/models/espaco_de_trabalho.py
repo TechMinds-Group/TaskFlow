@@ -6,8 +6,18 @@ from .membro import Membro
 
 class EspacoDeTrabalho(DefaultModel):
     """Modelo do espaco de trabalho"""
+    __tablename__ = "EspacoDeTrabalho"
     nome = db.Column(db.String(80), nullable=False)
-    espaco = db.relationship("Espaco", backref="espaco_de_trabalho")
+
+    # RELATIONSHIPS
+    espaco = db.relationship(
+        "Espaco",
+        backref="EspacoDeTrabalho"
+    )
+    membros = db.relationship(
+        "Membro",
+        backref="EspacoDeTrabalho"
+    )
 
     def insert_espaco_de_trabalho(self, nome, **_):
         """Insere o espaco de trabalho"""

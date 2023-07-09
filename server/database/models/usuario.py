@@ -6,10 +6,24 @@ from .default import DefaultModel, db
 
 class Usuario(DefaultModel):
     """Modelo do usuario"""
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    password = db.Column(db.String(255), nullable=False)
-    nome = db.Column(db.String(80), nullable=False)
-    membros = db.relationship("Membro", backref="usuario", lazy=True)
+    __tablename__ = "Usuario"
+    username = db.Column(
+        db.String(80),
+        unique=True,
+        nullable=False
+    )
+    password = db.Column(
+        db.String(255),
+        nullable=False
+    )
+    nome = db.Column(
+        db.String(80),
+        nullable=False
+    )
+    membros = db.relationship(
+        "Membro",
+        backref="Usuario",
+    )
 
     def insert_password(self, password):
         """Define a senha do usuario criptografada"""
