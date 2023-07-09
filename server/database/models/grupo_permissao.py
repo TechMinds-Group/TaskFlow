@@ -4,9 +4,9 @@ from .default import DefaultModel, db
 
 class GrupoPermissao(DefaultModel):
     """Modelo do grupo permissao"""
-    permissao_id = db.Column(db.Integer, db.ForeignKey(
+    permissao_id = db.Column(db.String(36), db.ForeignKey(
         "permissao.id"), nullable=False)
-    grupo_id = db.Column(db.Integer, db.ForeignKey(
+    grupo_id = db.Column(db.String(36), db.ForeignKey(
         "grupo.id"), nullable=False)
     permissao = db.relationship(
         "Permissao", back_populates="grupo_permissao"

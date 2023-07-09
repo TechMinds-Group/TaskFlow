@@ -5,7 +5,7 @@ from .default import DefaultModel, db
 class Lista(DefaultModel):
     """Modelo de lista"""
     nome = db.Column(db.String(80), nullable=False)
-    espaco_id = db.Column(db.Integer, db.ForeignKey(
+    espaco_id = db.Column(db.String(36), db.ForeignKey(
         "espaco.id"), nullable=False)
     tarefa = db.relationship("Tarefa", backref="lista")
 

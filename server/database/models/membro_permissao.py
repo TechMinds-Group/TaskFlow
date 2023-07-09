@@ -4,7 +4,7 @@ from .default import DefaultModel, db
 
 class MembroPermissao(DefaultModel):
     """Modelo do membro permissao"""
-    membro_espaco_id = db.Column(db.Integer, db.ForeignKey(
+    membro_espaco_id = db.Column(db.String(36), db.ForeignKey(
         "membro_espaco.id"), nullable=False)
     permissao = db.relationship(
         "Permissao", back_populates="membro_permissao"

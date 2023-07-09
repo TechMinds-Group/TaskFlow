@@ -4,9 +4,9 @@ from .default import DefaultModel, db
 
 class Mensagem(DefaultModel):
     """Modelo de mensagem"""
-    membro_id = db.Column(db.Integer, db.ForeignKey(
+    membro_id = db.Column(db.String(36), db.ForeignKey(
         "membro.id"), nullable=False)
-    tarefa_id = db.Column(db.Integer, db.ForeignKey(
+    tarefa_id = db.Column(db.String(36), db.ForeignKey(
         "tarefa.id"), nullable=False)
 
     def insert_mensagem(self, membro_id, tarefa_id, **_):
