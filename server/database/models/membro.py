@@ -18,7 +18,8 @@ class Membro(DefaultModel):
     # RELATIONSHIPS
     membro_espacos = db.relationship(
         "MembroEspaco",
-        backref="Membro"
+        backref="Membro",
+        lazy=True
     )
 
     def insert_membro(self, usuario_id, espaco_de_trabalho_id, **_):
