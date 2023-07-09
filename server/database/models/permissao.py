@@ -1,11 +1,18 @@
 """Modelo de permissao"""
 from loguru import logger
 from .default import DefaultModel, db
+from .grupo import Grupo
 
 
 class Permissao(DefaultModel):
     """Modelo de permissao"""
     __tablename__ = "Permissao"
+
+    customizar = db.Column(
+        db.Boolean,
+        nullable=False,
+        default=False
+    )
     endpoint = db.Column(
         db.String(80),
         nullable=False
@@ -14,18 +21,15 @@ class Permissao(DefaultModel):
         db.String(80),
         nullable=False
     )
-    customizar = db.Column(
-        db.Boolean,
-        nullable=False,
-        default=False
-    )
-    grupo_permissoes = db.relationship(
-        "GrupoPermissao",
+
+    # RELATIONSHIPS
+    membros_espaco_permissoes = db.relationship(
+        "MembroEspacoPermissao",
         backref="Permissao",
         lazy=True
     )
-    membros_espaco_permissoes = db.relationship(
-        "MembroEspacoPermissao",
+    grupo_permissoes = db.relationship(
+        "GrupoPermissao",
         backref="Permissao",
         lazy=True
     )
@@ -65,6 +69,7 @@ class Permissao(DefaultModel):
     @staticmethod
     def create_permissions(endpoint, methods):
         """Cria as permissões de rotas do servidor"""
+        permissoes = []
         for method in methods:
             permissao = Permissao.query.filter(
                 Permissao.endpoint == endpoint,
@@ -79,4 +84,6 @@ class Permissao(DefaultModel):
             else:
                 permissao.customizar = False
                 permissao.excluido = False
+            permissoes.append(permissao)
+        Grupo.create_grupo_with_permissions(endpoint, permissoes)
         permissao.save()
