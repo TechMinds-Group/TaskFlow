@@ -16,3 +16,12 @@ class Usuario(DefaultModel):
     def check_password(self, password):
         """Verifica se a senha informada é a mesma do usuario"""
         return check_password_hash(self.password, password)
+
+    def insert_credentials(self, username, password, **_):
+        """Insere as credenciais do usuario"""
+        self.username = username
+        self.set_password(password)
+
+    def insert_perfil(self, nome, **_):
+        """Insere o perfil do usuario"""
+        self.nome = nome

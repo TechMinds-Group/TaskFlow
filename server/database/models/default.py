@@ -35,3 +35,8 @@ class DefaultModel(db.Model):
         """Remove o objeto do banco de dados"""
         db.session.delete(self)
         return self
+
+    def rollback(self):
+        """Desfaz as alterações no banco de dados"""
+        db.session.rollback()
+        return self
