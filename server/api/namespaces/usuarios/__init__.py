@@ -15,7 +15,7 @@ np_usuarios = api.namespace(
 class UsuarioResource(Resource):
     """Classe de recursos de usuários"""
 
-    def user_id(self, usuario_id):
+    def query_for_id(self, usuario_id):
         """Retorna um usuário pelo id ou levanta 404"""
         user = Usuario.query.filter(
             Usuario.id == str(usuario_id)
@@ -29,7 +29,7 @@ class UsuarioResource(Resource):
     def get(self, usuario_id=None):
         """Retorna um usuário pelo id ou todos os usuários"""
         if usuario_id:
-            users = self.user_id(usuario_id)
+            users = self.query_for_id(usuario_id)
         else:
             users = Usuario.query.all()
 
