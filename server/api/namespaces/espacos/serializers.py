@@ -21,3 +21,24 @@ espaco_serializer = api.model(
         )
     }
 )
+
+membro_espaco_serializer = api.model(
+    'Membro',
+    {
+        'id': fields.String(
+            required=True,
+            example=str(uuid4()),
+            description='Id do membro'
+        ),
+        'espaco_id': fields.String(
+            required=True,
+            example=str(uuid4()),
+            description='Id do Espaco'
+        ),
+        'membro_id': fields.String(
+            required=True,
+            example=str(uuid4()),
+            description='Id do Membro'
+        ),
+    }
+)

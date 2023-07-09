@@ -16,3 +16,12 @@ form.add_argument(
     required=True,
     location='json'
 )
+
+criar_membro_parser = RequestParser()
+form = criar_membro_parser
+form.add_argument(
+    'membro_id',
+    required=True,
+    location='json',
+    type=str
+)

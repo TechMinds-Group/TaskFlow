@@ -19,3 +19,23 @@ trabalho_serializer = api.model(
 
     }
 )
+membro_serializer = api.model(
+    'Membro',
+    {
+        'id': fields.String(
+            required=True,
+            example=str(uuid4()),
+            description='Id do membro'
+        ),
+        'usuario_id': fields.String(
+            required=True,
+            example=str(uuid4()),
+            description='Id do Usuario'
+        ),
+        'espaco_de_trabalho_id': fields.String(
+            required=True,
+            example=str(uuid4()),
+            description='Id do Espaço de trabalho'
+        ),
+    }
+)
