@@ -7,8 +7,8 @@ from .serializers import trabalho_serializer
 from .forms import criar_trabalho_parser
 
 
-np_espaco_de_trabalho = api.namespace(
-    'espaco_de_trabalho', description='Espaço de trabalho')
+np_espaco_de_trabalhos = api.namespace(
+    'espaco_de_trabalhos', description='Espaço de trabalho')
 
 
 class EspacoDeTrabalhoResource(Resource):
@@ -30,7 +30,7 @@ class EspacoDeTrabalhoResource(Resource):
         return trabalho
         """
 
-    @np_espaco_de_trabalho.marshal_with(trabalho_serializer)
+    @np_espaco_de_trabalhos.marshal_with(trabalho_serializer)
     @jwt_required()
     def get(self, trabalho_id=None):
         """Retorna um espaço de trabalho pelo id
@@ -45,8 +45,8 @@ class EspacoDeTrabalhoResource(Resource):
             """
         return trabalhos, 200
 
-    @np_espaco_de_trabalho.marshal_with(trabalho_serializer)
-    @np_espaco_de_trabalho.expect(criar_trabalho_parser, validate=True)
+    @np_espaco_de_trabalhos.marshal_with(trabalho_serializer)
+    @np_espaco_de_trabalhos.expect(criar_trabalho_parser, validate=True)
     @jwt_required()
     def post(self):
         """Cria um novo espaço de trabalho"""
@@ -69,11 +69,11 @@ class EspacoDeTrabalhoResource(Resource):
         print('post')
 
 
-np_espaco_de_trabalho.add_resource(
+np_espaco_de_trabalhos.add_resource(
     EspacoDeTrabalhoResource,
     '/', methods=['POST', 'GET']
 )
-np_espaco_de_trabalho.add_resource(
+np_espaco_de_trabalhos.add_resource(
     EspacoDeTrabalhoResource,
     '/<uuid:trabalho_id>', methods=['GET']
 )
