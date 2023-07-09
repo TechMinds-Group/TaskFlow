@@ -1,6 +1,7 @@
+"""Módulo de inicialização do banco de dados"""
+from importlib import import_module
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
-from importlib import import_module
 
 db = SQLAlchemy()
 
