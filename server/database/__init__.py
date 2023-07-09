@@ -7,3 +7,4 @@ db = SQLAlchemy()
 def init_app(app: Flask):
     """Inicializa as extensões"""
     db.init_app(app)
+    return db
