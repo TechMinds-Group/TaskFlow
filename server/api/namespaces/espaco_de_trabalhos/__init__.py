@@ -65,6 +65,7 @@ class EspacoDeTrabalhoResource(Resource):
 
 class EspacoDeTrabalhoMembroResource(Resource):
     """Classe de recursos de membros de espaço de trabalho"""
+
     def get_with_espaco_de_trabalho_id(
             self, espaco_de_trabalho_id, membro_id=None):
         """Retorna um membro de um espaco_de_trabalho_id
@@ -97,25 +98,30 @@ class EspacoDeTrabalhoMembroResource(Resource):
 np_espaco_de_trabalhos.add_resource(
     EspacoDeTrabalhoResource,
     '/',
-    methods=['POST', 'GET']
+    methods=['POST', 'GET'],
+    endpoint='espaco_de_trabalho'
 )
 np_espaco_de_trabalhos.add_resource(
     EspacoDeTrabalhoResource,
     '/<uuid:espaco_de_trabalho_id>/',
-    methods=['GET']
+    methods=['GET'],
+    endpoint='espaco_de_trabalho_id'
 )
 np_espaco_de_trabalhos.add_resource(
     EspacoDeTrabalhoMembroResource,
     '/<uuid:espaco_de_trabalho_id>/membros/',
-    methods=['GET']
+    methods=['GET'],
+    endpoint='trabalho_membros'
 )
 np_espaco_de_trabalhos.add_resource(
     EspacoDeTrabalhoMembroResource,
     '/<uuid:espaco_de_trabalho_id>/membros/<uuid:membro_id>/',
-    methods=['GET']
+    methods=['GET'],
+    endpoint='trabalho_membro_id'
 )
 np_espaco_de_trabalhos.add_resource(
     EspacoDeTrabalhoMembroResource,
     '/membros/<uuid:membro_id>/',
-    methods=['GET']
+    methods=['GET'],
+    endpoint='membro_id'
 )

@@ -86,17 +86,23 @@ class MembroResource(Resource):
 np_espacos.add_resource(
     EspacoResource,
     '/',
-    methods=['POST', 'GET'])
+    methods=['POST', 'GET'],
+    endpoint='espacos'
+)
 np_espacos.add_resource(
     EspacoResource,
     '/<uuid:espaco_id>/',
-    methods=['GET'])
+    methods=['GET'],
+    endpoint='espacos_id')
 np_espacos.add_resource(
     MembroResource,
     '/<uuid:espaco_id>/membros/',
-    methods=['POST', 'GET'])
+    methods=['POST', 'GET'],
+    endpoint='espaco_membros'
+)
 np_espacos.add_resource(
     MembroResource,
     '/<uuid:espaco_id>/membros/<uuid:membro_id>/',
-    methods=['GET']
+    methods=['GET'],
+    endpoint='espaco_membros_id'
 )

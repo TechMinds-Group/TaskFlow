@@ -67,10 +67,12 @@ class UsuarioResource(Resource):
 np_usuarios.add_resource(
     UsuarioResource,
     '/',
-    methods=['GET', 'POST']
+    methods=['GET', 'POST'],
+    endpoint='usuarios'
 )
 np_usuarios.add_resource(
     UsuarioResource,
     '/<uuid:usuario_id>',
-    methods=['GET']
+    methods=['GET'],
+    endpoint='usuarios_id'
 )

@@ -34,4 +34,4 @@ class AuthResource(Resource):
         return {'token': user.generate_token()}, 200
 
 
-np_auth.add_resource(AuthResource, '/')
+np_auth.add_resource(AuthResource, '/', endpoint='auth')
