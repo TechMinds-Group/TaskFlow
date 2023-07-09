@@ -7,6 +7,7 @@ pre-commit install
 ```
 
 ## Como Rodar ?
+na duvida siga os passos do dockerfile
 ```sh
 flask run
 ```
