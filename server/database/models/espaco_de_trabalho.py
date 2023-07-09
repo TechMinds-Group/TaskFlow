@@ -14,7 +14,7 @@ class EspacoDeTrabalho(DefaultModel):
         self.nome = nome
 
     @staticmethod
-    def query_with_user(usuario_id, trabalho_id=None):
+    def query_with_user(usuario_id, espaco_de_trabalho_id=None):
         """Pega um espaco de trabalho pelo id ou levanta 404"""
         query = db.session.query(EspacoDeTrabalho).join(
             Membro, and_(
@@ -22,9 +22,9 @@ class EspacoDeTrabalho(DefaultModel):
                 EspacoDeTrabalho.id == Membro.espaco_de_trabalho_id
             )
         )
-        if trabalho_id:
+        if espaco_de_trabalho_id:
             query = query.filter(
-                EspacoDeTrabalho.id == trabalho_id
+                EspacoDeTrabalho.id == espaco_de_trabalho_id
             ).first()
         else:
             query = query.all()
