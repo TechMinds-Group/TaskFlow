@@ -4,7 +4,6 @@ from .default import DefaultModel, db
 
 class MembroEspaco(DefaultModel):
     """Modelo do membro no espaco de trabalho"""
-    id = db.Column(db.Integer, primary_key=True)
     espaco_id = db.Column(db.Integer, db.ForeignKey(
         "espaco.id"), nullable=False)
     membro_id = db.Column(db.Integer, db.ForeignKey(
