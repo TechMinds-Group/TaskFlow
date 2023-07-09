@@ -4,6 +4,7 @@ from flask_jwt_extended.exceptions import NoAuthorizationError
 from jwt.exceptions import ExpiredSignatureError
 from flask_restx import Api
 from flask import Flask
+from loguru import logger
 
 
 api = Api()
@@ -20,11 +21,13 @@ def handle_error(error):
     elif isinstance(error, ExpiredSignatureError):
         message = 'Token expirado'
         code = 401
+    logger.critical(error)
     return {'message': message}, code
 
 
 def init_app(app: Flask):
     """Iniciando a api"""
+    logger.info('🔧 Inicializando a api.')
     app.config['ERROR_404_HELP'] = False
     api.init_app(app)
     import_module('server.api.namespaces')

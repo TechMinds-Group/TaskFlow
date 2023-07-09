@@ -1,6 +1,7 @@
 """Rotas para o namespace de espaços de trabalho"""
 from flask_restx import Resource, abort
 from sqlalchemy.exc import IntegrityError
+from loguru import logger
 from server.api import api
 from server.database.models import Espaco, MembroEspaco
 from .forms import criar_espaco_parser, criar_membro_parser
@@ -78,6 +79,7 @@ class MembroResource(Resource):
                 membro.rollback()
                 abort(500, message='Erro ao criar um membro')
             membro.save()
+            logger.debug('🤖 Foi adicionando um novo membro a um espaco.')
         return membro, 201
 
 

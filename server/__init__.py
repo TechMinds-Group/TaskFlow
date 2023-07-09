@@ -1,5 +1,6 @@
 """Módulo de inicialização do servidor"""
 from importlib import import_module
+from loguru import logger
 from flask import Flask
 import click
 
@@ -16,21 +17,24 @@ class Servidor(Flask):
         self.db = None  # pylint: disable=invalid-name
         self.api = None  # pylint: disable=invalid-name
         self.jwt = None  # pylint: disable=invalid-name
+        logger.info('🔧 Servidor inicializando.')
 
     def create_database(self):
         """Cria o banco de dados"""
         with self.app_context():
             self.db.create_all()
+            logger.info('🔧 Banco criado com sucesso.')
 
     def create_permissions(self):
         """Cria as permissões de rotas do servidor"""
         permissao = import_module('server.database.models').Permissao
+        logger.info('🔧 Iniciando as configurações de permissoes.')
         for rule in list(self.url_map.iter_rules()):
             permissao.create_permissions(
                 endpoint=rule.endpoint,
                 methods=list(rule.methods)
-
             )
+        logger.info('🔧 Permissões concluidas.')
 
     def commands(self):
         """Adiciona os comandos ao servidor"""
@@ -52,3 +56,4 @@ class Servidor(Flask):
             self.api = self.init_api()
             self.jwt = self.init_auth()
             self.commands()
+            logger.info('🚀 Servidor Inicializado.')

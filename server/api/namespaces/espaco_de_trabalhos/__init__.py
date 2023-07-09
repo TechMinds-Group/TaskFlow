@@ -2,6 +2,7 @@
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_restx import Resource, abort
 from sqlalchemy.exc import IntegrityError
+from loguru import logger
 from server.api import api
 from server.database.models import EspacoDeTrabalho, Membro
 from .serializers import trabalho_serializer, membro_serializer
@@ -57,6 +58,7 @@ class EspacoDeTrabalhoResource(Resource):
                 500,
                 message='Erro ao adicionar membro ao espaço de trabalho'
             )
+        logger.debug('🤖 Uma nova area de trabalho foi criada.')
         trabalho.save()
         return trabalho, 201
 
