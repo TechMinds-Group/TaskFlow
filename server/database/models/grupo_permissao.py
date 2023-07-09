@@ -8,6 +8,9 @@ class GrupoPermissao(DefaultModel):
         "permissao.id"), nullable=False)
     grupo_id = db.Column(db.Integer, db.ForeignKey(
         "grupo.id"), nullable=False)
+    permissao = db.relationship(
+        "Permissao", back_populates="grupo_permissao"
+    )
 
     def insert_grupo_permissao(self, permissao_id, grupo_id, **_):
         """Insere o grupo permissao"""

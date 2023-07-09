@@ -9,6 +9,7 @@ class Tarefa(DefaultModel):
         "tarefa.id"), nullable=False)
     lista_id = db.Column(db.Integer, db.ForeignKey(
         "lista.id"), nullable=False)
+    menssagem = db.relationship("Mensagem", backref="tarefa")
 
     def insert_tarefa(self, nome, tarefa_id, lista_id, **_):
         """Insere a tarefa"""

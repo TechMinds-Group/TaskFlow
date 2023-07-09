@@ -7,6 +7,7 @@ class Espaco(DefaultModel):
     nome = db.Column(db.String(80), nullable=False)
     espaco_de_trabalho_id = db.Column(db.Integer, db.ForeignKey(
         "espaco_de_trabalho.id"), nullable=False)
+    lista = db.relationship("Lista", backref="espaco")
 
     def insert_espaco(self, nome, espaco_de_trabalho_id, **_):
         """Insere o espaco de trabalho"""
