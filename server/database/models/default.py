@@ -1,3 +1,4 @@
+"""Módulo base para os modelos"""
 from uuid import uuid4
 from .. import db
 

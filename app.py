@@ -1,3 +1,4 @@
+"""Arquivo Inicial do Servidor."""
 from server import Servidor
 
 
