@@ -5,7 +5,7 @@ from .default import DefaultModel, db
 class Tarefa(DefaultModel):
     """Modelo de tarefa"""
     nome = db.Column(db.String(80), nullable=False)
-    lista_id = db.Column(db.Integer, db.ForeignKey(
+    lista_id = db.Column(db.String(36), db.ForeignKey(
         "lista.id"), nullable=False)
     menssagem = db.relationship("Mensagem", backref="tarefa")
 
