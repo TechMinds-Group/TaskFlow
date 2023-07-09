@@ -18,11 +18,13 @@ class MembroEspaco(DefaultModel):
     # RELATIONSHIPS
     membro_permissoes = db.relationship(
         "MembroEspacoPermissao",
-        backref="MembroEspaco"
+        backref="MembroEspaco",
+        lazy=True
     )
     membro_espacos_grupos = db.relationship(
         "MembroEspacoGrupo",
-        backref="MembroEspaco"
+        backref="MembroEspaco",
+        lazy=True
     )
 
     def insert_membro_espaco(self, espaco_id, membro_id, **_):

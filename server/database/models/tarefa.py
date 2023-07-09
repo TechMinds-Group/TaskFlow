@@ -18,7 +18,8 @@ class Tarefa(DefaultModel):
     # RELATIONSHIPS
     menssagem = db.relationship(
         "Mensagem",
-        backref="tarefa"
+        backref="tarefa",
+        lazy=True
     )
 
     def insert_tarefa(self, nome, lista_id, **_):

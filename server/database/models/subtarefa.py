@@ -18,11 +18,13 @@ class Subtarefa(DefaultModel):
     # RELATIONSHIPS
     parent_subtasks = db.relationship(
         'Tarefa',
-        foreign_keys=[parent_tarefa_id]
+        foreign_keys=[parent_tarefa_id],
+        lazy=True
     )
     subtasks = db.relationship(
         'Tarefa',
-        foreign_keys=[tarefa_id]
+        foreign_keys=[tarefa_id],
+        lazy=True
     )
 
     def insert_subtarefa(self, parent_tarefa_id, tarefa_id, **_):

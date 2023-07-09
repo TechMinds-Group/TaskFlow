@@ -12,7 +12,8 @@ class Lista(DefaultModel):
     # RELATIONSHIPS
     tarefas = db.relationship(
         "Tarefa",
-        backref="Lista"
+        backref="Lista",
+        lazy=True
     )
 
     def insert_lista(self, nome, espaco_id, **_):

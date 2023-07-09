@@ -10,11 +10,13 @@ class Grupo(DefaultModel):
     # RELATIONSHIPS
     grupo_permissoes = db.relationship(
         "GrupoPermissao",
-        backref="Grupo"
+        backref="Grupo",
+        lazy=True
     )
     membro_espaco_grupos = db.relationship(
         "MembroEspacoGrupo",
-        backref="Grupo"
+        backref="Grupo",
+        lazy=True
     )
 
     def insert_grupo(self, nome, **_):

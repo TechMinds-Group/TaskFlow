@@ -20,11 +20,13 @@ class Permissao(DefaultModel):
     )
     grupo_permissoes = db.relationship(
         "GrupoPermissao",
-        backref="Permissao"
+        backref="Permissao",
+        lazy=True
     )
     membros_espaco_permissoes = db.relationship(
         "MembroEspacoPermissao",
-        backref="Permissao"
+        backref="Permissao",
+        lazy=True
     )
 
     def insert_permissao(self, endpoint, metodo, customizar, **_):

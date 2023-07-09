@@ -5,13 +5,27 @@ from .default import DefaultModel, db
 class Espaco(DefaultModel):
     """Modelo do espaco de trabalho"""
     __tablename__ = 'Espaco'
-    nome = db.Column(db.String(80), nullable=False)
-    espaco_de_trabalho_id = db.Column(db.String(36), db.ForeignKey(
-        "EspacoDeTrabalho.id"), nullable=False)
-    lista = db.relationship("Lista", backref="Espaco")
+    nome = db.Column(
+        db.String(80),
+        nullable=False
+    )
+    espaco_de_trabalho_id = db.Column(
+        db.String(36),
+        db.ForeignKey("EspacoDeTrabalho.id"),
+        nullable=False
+    )
+
+    # RELATIONSHIPS
+    lista = db.relationship(
+        "Lista",
+        backref="Espaco",
+        lazy=True
+    )
 
     membros_espacos = db.relationship(
-        "MembroEspaco", backref="Espaco"
+        "MembroEspaco",
+        backref="Espaco",
+        lazy=True
     )
 
     def insert_espaco(self, nome, espaco_de_trabalho_id, **_):

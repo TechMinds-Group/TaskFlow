@@ -23,6 +23,7 @@ class Usuario(DefaultModel):
     membros = db.relationship(
         "Membro",
         backref="Usuario",
+        lazy=True
     )
 
     def insert_password(self, password):
