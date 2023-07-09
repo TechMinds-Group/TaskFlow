@@ -17,13 +17,13 @@ class EspacoDeTrabalhoResource(Resource):
 
     @np_espaco_de_trabalhos.marshal_with(trabalho_serializer)
     @jwt_required()
-    def get(self, trabalho_id=None):
+    def get(self, espaco_de_trabalho_id=None):
         """Retorna um espaço de trabalho pelo id
         ou todos os espaços de trabalho"""
-        if trabalho_id:
+        if espaco_de_trabalho_id:
             trabalhos = EspacoDeTrabalho.query_with_user(
                 usuario_id=get_jwt_identity(),
-                trabalho_id=trabalho_id
+                espaco_de_trabalho_id=espaco_de_trabalho_id
             )
             if not trabalhos:
                 abort(404, message='Espaço de trabalho não encontrado')
@@ -67,5 +67,5 @@ np_espaco_de_trabalhos.add_resource(
 )
 np_espaco_de_trabalhos.add_resource(
     EspacoDeTrabalhoResource,
-    '/<uuid:trabalho_id>', methods=['GET']
+    '/<uuid:espaco_de_trabalho_id>', methods=['GET']
 )
