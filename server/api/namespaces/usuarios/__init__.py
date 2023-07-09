@@ -3,6 +3,7 @@ import re
 from flask_restx import Resource, abort
 from flask_jwt_extended import jwt_required
 from sqlalchemy.exc import IntegrityError
+from loguru import logger
 from server.api import api
 from server.database.models import Usuario
 from .serializers import usuario_serializer
@@ -55,6 +56,10 @@ class UsuarioResource(Resource):
                     errors={message.group(1): 'username já em uso'}
                 )
             abort(500, message='Erro interno do servidor')
+
+        logger.debug(
+            f'🤖 O usuario {user.username} foi adicionado ao servidor.'
+        )
         user.save()
         return user, 201
 

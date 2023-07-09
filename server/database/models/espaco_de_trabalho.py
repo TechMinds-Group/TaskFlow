@@ -1,5 +1,6 @@
 """Modelo do espaco de trabalho"""
 from sqlalchemy import and_
+from loguru import logger
 from .default import DefaultModel, db
 from .membro import Membro
 
@@ -47,6 +48,8 @@ class EspacoDeTrabalho(DefaultModel):
 
     def add_membro(self, usuario_id):
         """Adiciona um membro ao espaco de trabalho"""
+        logger.debug(f'🤖 Adicionando membro {usuario_id} '
+                     f'ao espaco de trabalho {self.id}')
         membro = Membro.query.filter(
             Membro.usuario_id == usuario_id,
             Membro.espaco_de_trabalho_id == self.id

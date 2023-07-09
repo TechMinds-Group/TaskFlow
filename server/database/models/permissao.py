@@ -1,4 +1,5 @@
 """Modelo de permissao"""
+from loguru import logger
 from .default import DefaultModel, db
 
 
@@ -38,6 +39,7 @@ class Permissao(DefaultModel):
     @staticmethod
     def reset_permissions(endpoint):
         """Reseta as permissões de uma rota colocando todas como excluídas"""
+        logger.debug('🤖 Reiniciando as permissões.')
         db.session.query(Permissao).filter(
             Permissao.endpoint == endpoint,
             Permissao.customizar == False  # noqa # pylint: disable=singleton-comparison
@@ -49,6 +51,8 @@ class Permissao(DefaultModel):
     @staticmethod
     def add_permissao(endpoint, method):
         """Adiciona uma permissao"""
+        logger.debug('🤖 Nova Permissão no sistema'
+                     f' endpoint:{endpoint} method:{method}.')
         permissao = Permissao()
         permissao.insert_permissao(
             endpoint=endpoint,
