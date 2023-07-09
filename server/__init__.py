@@ -8,12 +8,14 @@ class Servidor(Flask):
     """Classe de inicialização do servidor"""
     init_db = import_module('server.database').init_app
     init_api = import_module('server.api').init_app
+    init_auth = import_module('server.auth').init_app
 
     def __init__(self):
         super().__init__(__name__)
         self.config.from_prefixed_env()
         self.db = None  # pylint: disable=invalid-name
         self.api = None  # pylint: disable=invalid-name
+        self.jwt = None  # pylint: disable=invalid-name
 
     def create_database(self):
         """Cria o banco de dados"""
@@ -33,4 +35,5 @@ class Servidor(Flask):
         with self.app_context():
             self.db = self.init_db()
             self.api = self.init_api()
+            self.jwt = self.init_auth()
             self.commands()

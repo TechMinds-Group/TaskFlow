@@ -1,6 +1,7 @@
 """Rotas de usuários"""
 import re
 from flask_restx import Resource, abort
+from flask_jwt_extended import jwt_required
 from sqlalchemy.exc import IntegrityError
 from server.api import api
 from server.database.models import Usuario
@@ -24,6 +25,7 @@ class UsuarioResource(Resource):
         return user
 
     @np_usuarios.marshal_with(usuario_serializer)
+    @jwt_required()
     def get(self, usuario_id=None):
         """Retorna um usuário pelo id ou todos os usuários"""
         if usuario_id:
