@@ -37,11 +37,10 @@ class Permissao(DefaultModel):
         self.customizar = customizar
 
     @staticmethod
-    def reset_permissions(endpoint):
+    def reset_permissions():
         """Reseta as permissões de uma rota colocando todas como excluídas"""
         logger.debug('🤖 Reiniciando as permissões.')
         db.session.query(Permissao).filter(
-            Permissao.endpoint == endpoint,
             Permissao.customizar == False  # noqa # pylint: disable=singleton-comparison
         ).update({
             'excluido': True
@@ -66,7 +65,6 @@ class Permissao(DefaultModel):
     @staticmethod
     def create_permissions(endpoint, methods):
         """Cria as permissões de rotas do servidor"""
-        Permissao.reset_permissions(endpoint)
         for method in methods:
             permissao = Permissao.query.filter(
                 Permissao.endpoint == endpoint,
