@@ -22,12 +22,27 @@ class Servidor(Flask):
         with self.app_context():
             self.db.create_all()
 
+    def create_permissions(self):
+        """Cria as permissões de rotas do servidor"""
+        permissao = import_module('server.database.models').Permissao
+        for rule in list(self.url_map.iter_rules()):
+            permissao.create_permissions(
+                endpoint=rule.endpoint,
+                methods=list(rule.methods)
+
+            )
+
     def commands(self):
         """Adiciona os comandos ao servidor"""
         self.cli.add_command(
             # pylint: disable=unnecessary-lambda
             cmd=click.command(lambda: self.create_database()),
             name='create_database'
+        )
+        self.cli.add_command(
+            # pylint: disable=unnecessary-lambda
+            cmd=click.command(lambda: self.create_permissions()),
+            name='create_permissions'
         )
 
     def setup(self):
