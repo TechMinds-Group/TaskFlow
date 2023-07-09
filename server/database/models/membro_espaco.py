@@ -8,10 +8,10 @@ class MembroEspaco(DefaultModel):
         "espaco.id"), nullable=False)
     membro_id = db.Column(db.Integer, db.ForeignKey(
         "membro.id"), nullable=False)
-    membro_permissao = db.relationship(
+    membro_permissoes = db.relationship(
         "MembroPermissao", back_populates="membro_espaco"
     )
-    membro_grupo = db.relationship(
+    membro_grupos = db.relationship(
         "MembroGrupo", back_populates="membro_espaco"
     )
 

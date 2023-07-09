@@ -13,6 +13,8 @@ from .grupo_permissao import GrupoPermissao
 from .membro_permissao import MembroPermissao
 from .grupo import Grupo
 
-__all__ = ['Usuario', 'Espaco', 'EspacoDeTrabalho', 'Membro',
-           'MembroEspaco', 'Lista', 'Mensagem', 'Tarefa', 'Subtarefa',
-           'Permissao', 'GrupoPermissao', 'MembroPermissao', 'Grupo']
+__all__ = [
+    'Usuario', 'Espaco', 'EspacoDeTrabalho', 'Membro',
+    'MembroEspaco', 'Lista', 'Mensagem', 'Tarefa', 'Subtarefa',
+    'Permissao', 'GrupoPermissao', 'MembroPermissao', 'Grupo'
+]

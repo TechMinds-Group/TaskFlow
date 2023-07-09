@@ -23,7 +23,7 @@ espaco_serializer = api.model(
 )
 
 membro_espaco_serializer = api.model(
-    'Membro',
+    'MembroEspaco',
     {
         'id': fields.String(
             required=True,
@@ -39,6 +39,6 @@ membro_espaco_serializer = api.model(
             required=True,
             example=str(uuid4()),
             description='Id do Membro'
-        ),
+        )
     }
 )
