@@ -1,17 +1,19 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# TaskFlow - Front
 
-## Getting Started
+## Como testar ? (Sem Docker)
+* Tenha o Node.js Instalado: https://nodejs.org/ptbr
+* Clone o repositório: `git clone -b development https://github.com/TechMinds-Group/TaskFlow.git`
+* Entre no repositório: `cd front`
+* Instale as dependências do projeto: `npm i`
+* Inicie o projeto: `npm run dev`
 
-First, run the development server:
+## Como testar ? (Com Docker)
+* Tenha o Docker Instalado: https://www.docker.com
+* Clone o repositório: `git clone -b development https://github.com/TechMinds-Group/TaskFlow.git`
+* Entre no repositório: `cd front`
+* Builde o Dockerfile: `docker build -t taskflow-front .`
+* Inicie o container: `docker run --name taskflow-front -p 3001:5001 taskflow-front`
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+#
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+#### O Front estará rodando no http://localhost:3001
