@@ -5,6 +5,8 @@
 * Clone o repositório: `git clone -b development https://github.com/TechMinds-Group/TaskFlow.git`
 * Na pasta raíz do projeto, execute o comando: `docker-compose up`
 
+#
+
 #### O back-end estará rodando no http://localhost:3000
 #### O front-end estará rodando no http://localhost:3001
 
