@@ -6,7 +6,7 @@ na duvida siga os passos do dockerfile
 ## Instalando e criando ambiente virtual:
 ```sh
 pip install virtualenv
-virtualenv nome_do_ambiente
+python -m venv nome_do_ambiente
 ```
 ## Iniciando ambiente virtual no Windows:
 ```sh
