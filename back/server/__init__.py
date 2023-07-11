@@ -2,6 +2,7 @@
 from importlib import import_module
 from loguru import logger
 from flask import Flask
+from flask_cors import CORS
 import click
 
 
@@ -17,6 +18,7 @@ class Servidor(Flask):
         self.db = None  # pylint: disable=invalid-name
         self.api = None  # pylint: disable=invalid-name
         self.jwt = None  # pylint: disable=invalid-name
+        CORS(self)
         logger.info('🔧 Servidor inicializando.')
 
     def create_database(self):
