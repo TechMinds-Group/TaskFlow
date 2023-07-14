@@ -17,7 +17,7 @@ trabalho_serializer = api.model(
             example='Nome do espaço de trabalho',
             description='Nome do espaço de trabalho'
         ),
-        'espaco': fields.List(
+        'espacos': fields.List(
             fields.Nested(espaco_serializer)
         )
     }
