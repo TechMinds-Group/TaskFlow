@@ -14,7 +14,7 @@ trabalho_serializer = api.model(
         ),
         'nome': fields.String(
             required=True,
-            exemple='Nome do espaço de trabalho',
+            example='Nome do espaço de trabalho',
             description='Nome do espaço de trabalho'
         ),
         'espaco': fields.List(
