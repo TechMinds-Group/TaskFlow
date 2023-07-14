@@ -2,7 +2,7 @@
 from uuid import uuid4
 from flask_restx import fields
 from server.api import api
-from ..espacos.serializers import membro_espaco_serializer
+from ..espacos.serializers import membro_espaco_serializer, espaco_serializer
 
 trabalho_serializer = api.model(
     'EspacoDeTrabalho',
@@ -16,8 +16,10 @@ trabalho_serializer = api.model(
             required=True,
             exemple='Nome do espaço de trabalho',
             description='Nome do espaço de trabalho'
+        ),
+        'espaco': fields.List(
+            fields.Nested(espaco_serializer)
         )
-
     }
 )
 membro_serializer = api.model(
