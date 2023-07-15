@@ -14,12 +14,12 @@ services:
     networks:
       - taskflownetwork
 
-  client:
-    build:
-      context: ./front
-      dockerfile: Dockerfile
-    container_name: taskflow-front
-    ports:
-      - "3001:5001"
-    networks:
-      - taskflownetwork
+  # client:
+  #   build:
+  #     context: ./front
+  #     dockerfile: Dockerfile
+  #   container_name: taskflow-front
+  #   ports:
+  #     - "3001:5001"
+  #   networks:
+  #     - taskflownetwork
