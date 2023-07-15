@@ -14,7 +14,7 @@ class EspacoDeTrabalho(DefaultModel):
     )
 
     # RELATIONSHIPS
-    espaco = db.relationship(
+    espacos = db.relationship(
         "Espaco",
         backref="EspacoDeTrabalho",
         lazy=True

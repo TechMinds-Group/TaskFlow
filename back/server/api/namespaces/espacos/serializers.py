@@ -33,7 +33,7 @@ espaco_serializer = api.model(
             required=True,
         ),
         'nome': fields.String(
-            example='Espaço de trabalho',
+            example='Espaço',
             required=True,
         ),
         'espaco_de_trabalho_id': fields.String(
