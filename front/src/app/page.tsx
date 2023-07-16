@@ -1,10 +1,16 @@
-import styles from "./page.module.css";
+"use client";
+import { useRouter } from "next/navigation";
+import { QueryClientProvider } from "react-query";
+import { queryClient } from "../services/queryClient";
 
 export default function Home() {
-  const environment = process.env.NEXT_PUBLIC_BASE_URL;
+  const router = useRouter();
+
   return (
-    <main className={styles.main}>
-      <p>{environment}</p>
-    </main>
+    <QueryClientProvider client={queryClient}>
+      <main>
+        <button onClick={() => router.push("login")}>clique</button>
+      </main>
+    </QueryClientProvider>
   );
 }
