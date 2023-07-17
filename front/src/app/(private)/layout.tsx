@@ -1,15 +1,9 @@
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
+import { AuthGuard } from "../../guards/AuthGuard";
 
 export default function AuthenticatorLayoutComponent({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <html lang="ptbr">
-      <body className={inter.className}>{children}</body>
-    </html>
-  );
+  return <AuthGuard>{children}</AuthGuard>;
 }

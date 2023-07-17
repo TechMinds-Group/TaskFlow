@@ -1,8 +1,10 @@
 "use client";
 
+import { QueryClientProvider } from "@tanstack/react-query";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { useNProgress } from "../hooks/useNProgress";
+import { queryClient } from "../services/queryClient";
 import "../styles/globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -18,6 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   useNProgress();
+
   return (
     <html lang="ptbr">
       <head>
@@ -26,7 +29,11 @@ export default function RootLayout({
         <link rel="icon" href="/logo_taskflow_without_text.svg" />
         <title>TaskFlow</title>
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <QueryClientProvider client={queryClient}>
+          {children}
+        </QueryClientProvider>
+      </body>
     </html>
   );
 }
